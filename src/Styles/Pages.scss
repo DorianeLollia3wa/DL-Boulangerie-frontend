@@ -1,0 +1,29 @@
+@import url("../Fonts/Poppins.ttf");
+@import url("../Fonts/Roboto.ttf");
+/* Styles pour les polices */
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+  font-family: url("../Fonts/Poppins.ttf"), sans-serif;
+  font-weight: bold;
+}
+p,
+pre,
+form,
+button,
+input {
+  font-family: url("../Fonts/Roboto.ttf"), "Lucida Sans", "Lucida Sans Regular",
+    "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+button {
+  letter-spacing: 1px;
+  font-weight: bold;
+}
