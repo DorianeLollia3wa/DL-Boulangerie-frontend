@@ -15,12 +15,18 @@ label {
 p,
 pre,
 form,
-button,
-input {
+input,
+li {
+  font-style: italic;
   font-family: url("../Fonts/Roboto.ttf"), "Lucida Sans", "Lucida Sans Regular",
     "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 button {
+  cursor: pointer;
   letter-spacing: 1px;
   font-weight: bold;
+  font-family: url("../Fonts/Roboto.ttf"), "Lucida Sans", "Lucida Sans Regular",
+    "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  border: 1px solid gainsboro;
 }

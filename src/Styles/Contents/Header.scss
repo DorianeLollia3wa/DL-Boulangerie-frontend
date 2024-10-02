@@ -23,22 +23,27 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      padding-right: 20px;
 
       li {
         cursor: pointer;
         font-size: 16px;
-
-        &.button {
-          background-color: #e89561;
-          padding: 5px 10px;
-          border-radius: 5px;
-          color: white;
-          text-transform: uppercase;
-          transition: background-color 0.3s ease;
+        text-decoration: underline;
+        text-underline-offset: 5px;
+        color: $darkBrown3;
+        &:hover {
+          color: $clearBrown1;
         }
-
-        &.button:hover {
-          background-color: #cb2c2c;
+      }
+      button {
+        background-color: $clearBrown1;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: white;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+        &:hover {
+          background-color: $darkRed1;
         }
       }
     }
@@ -64,20 +69,19 @@
       right: 0px;
       position: absolute;
       flex-direction: column;
-      padding: 10px;
+      padding: 10px !important;
       padding-bottom: 0;
       border-bottom-left-radius: 8px;
       align-items: flex-start;
       z-index: 10;
       background-color: $clearPink1;
-
       transition: max-height 0.9s ease;
       li {
         text-wrap: nowrap;
         width: 100%;
         text-align: center;
         &:hover {
-          background-color: gainsboro;
+          background-color: $clearGray2;
         }
       }
     }
@@ -85,9 +89,11 @@
     ul.open {
       max-height: 300px;
       overflow: hidden;
+      padding: 0 !important;
     }
     ul.close {
       max-height: 0;
+      padding: 0 !important;
       overflow: hidden;
     }
   }

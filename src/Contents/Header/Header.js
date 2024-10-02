@@ -20,19 +20,19 @@ export default function Header() {
         />
         <ul className={menuOpen ? "open" : "close"}>
           <li>Nos produits</li>
-          <li>Mon panier</li>
-          <li>Mes commandes</li>
+
           {isAuthenticated ? (
             <>
+              <li>Mon panier</li>
               <li>Mes Commandes</li>
-              <li onClick={logout} className="button">
+              <button onClick={logout} className="button">
                 Se Déconnecter
-              </li>
+              </button>
             </>
           ) : (
-            <li onClick={login} className="button">
+            <button onClick={login} className="button">
               Se Connecter
-            </li>
+            </button>
           )}
         </ul>
       </nav>
