@@ -1,0 +1,110 @@
+@import "../variables";
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $clearPink1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .logo {
+    height: 70px;
+    width: 200px;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    .bars {
+      display: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      li {
+        cursor: pointer;
+        font-size: 16px;
+
+        &.button {
+          background-color: #e89561;
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: white;
+          text-transform: uppercase;
+          transition: background-color 0.3s ease;
+        }
+
+        &.button:hover {
+          background-color: #cb2c2c;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .Header {
+    align-items: center;
+  }
+
+  .nav-links {
+    position: relative;
+    .bars {
+      display: inherit !important;
+      font-size: 24px;
+      padding-right: 30px;
+    }
+
+    ul {
+      display: none;
+      top: 100%;
+      right: 0px;
+      position: absolute;
+      flex-direction: column;
+      padding: 10px;
+      padding-bottom: 0;
+      border-bottom-left-radius: 8px;
+      align-items: flex-start;
+      z-index: 10;
+      background-color: $clearPink1;
+
+      transition: max-height 0.9s ease;
+      li {
+        text-wrap: nowrap;
+        width: 100%;
+        text-align: center;
+        &:hover {
+          background-color: gainsboro;
+        }
+      }
+    }
+
+    ul.open {
+      max-height: 300px;
+      overflow: hidden;
+    }
+    ul.close {
+      max-height: 0;
+      overflow: hidden;
+    }
+  }
+
+  .Header .logo {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Header .nav-links ul {
+    li {
+      font-size: 14px;
+    }
+
+    li.button {
+      padding: 5px;
+    }
+  }
+}
