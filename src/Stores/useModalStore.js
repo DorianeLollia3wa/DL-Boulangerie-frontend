@@ -11,8 +11,6 @@ const useModalStore = create((set, get) => {
     setOpenConnections: setter("openConnections"),
 
     closeAllModals: () => {
-      console.log("closeAllModals exécuté");
-
       const state = get();
       const newState = {};
       const exceptions = ["exeption"];

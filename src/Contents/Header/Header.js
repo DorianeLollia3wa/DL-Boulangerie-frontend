@@ -4,11 +4,11 @@ import logo from "../../Assets/logo/logo.png";
 import ImgBox from "../../Components/ImgBox";
 
 import useModalStore from "../../Stores/useModalStore";
-import useUserStore from "../../Stores/useUserStore ";
+import useUserStore from "../../Stores/useUserStore";
 import "../../Styles/Contents/Header.scss";
 
 export default function Header() {
-  const { isAuthenticated, login, logout } = useUserStore();
+  const { isAuthenticated, logout } = useUserStore();
   const setOpenConnections = useModalStore((s) => s.setOpenConnections);
 
   const [menuOpen, setMenuOpen] = useState(false);
