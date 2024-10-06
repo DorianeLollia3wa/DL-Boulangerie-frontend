@@ -1,5 +1,6 @@
+@import "./variables";
 body {
-  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
 }
 
 h1,
@@ -9,24 +10,75 @@ h4,
 h5,
 h6,
 label {
-  font-family: url("../Fonts/Poppins.ttf"), sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: bold;
 }
+
 p,
 pre,
 form,
 input,
 li {
+  font-family: "Roboto", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+li {
   font-style: italic;
-  font-family: url("../Fonts/Roboto.ttf"), "Lucida Sans", "Lucida Sans Regular",
-    "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 button {
   cursor: pointer;
   letter-spacing: 1px;
   font-weight: bold;
-  font-family: url("../Fonts/Roboto.ttf"), "Lucida Sans", "Lucida Sans Regular",
-    "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Poppins", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   border-radius: 8px;
   border: 1px solid gainsboro;
+  transform: all 0.3s ease-in-out;
+}
+
+.Modals {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10;
+  border-radius: 8px;
+  padding: 10px 20px;
+  background-color: $clearPink1;
+  justify-content: space-around;
+  box-shadow: 0px 2px 15px $darkGray2;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  h1 {
+    color: $darkBrown2;
+    text-align: center;
+    padding: 40px 20px;
+    padding-top: 0;
+  }
+}
+.BoxInput {
+  position: relative;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0px 2px 15px $clearBrown2;
+  label {
+    z-index: 1;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    background-color: white;
+    padding: 5px 20px;
+    padding-bottom: 0px;
+    border-radius: 15px 15px 0 0;
+  }
+  input {
+    box-sizing: border-box;
+    border: none;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
 }

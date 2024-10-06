@@ -22,7 +22,11 @@
 
 /* Styles pour tablettes (769px) */
 @media screen and (min-width: 769px) {
-  :root {
+  :root { 
+    --font-size-h1: 30px;
+    --font-size-h2: 27px;
+    --font-size-h3: 22px;
+    --font-size-h4: 18px;
     --font-size-h5: 16px;
     --font-size-h6: 15px;
     --font-size-p: 15px;
@@ -95,7 +99,7 @@ h6 {
   font-size: var(--font-size-h6)!important;
 }
 
-p,ul,li {
+p,ul,li,input {
   font-size: var(--font-size-p)!important;
 }
 
