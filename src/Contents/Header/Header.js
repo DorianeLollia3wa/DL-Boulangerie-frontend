@@ -3,11 +3,14 @@ import { useState } from "react";
 import logo from "../../Assets/logo/logo.png";
 import ImgBox from "../../Components/ImgBox";
 
+import useModalStore from "../../Stores/useModalStore";
 import useUserStore from "../../Stores/useUserStore ";
 import "../../Styles/Contents/Header.scss";
 
 export default function Header() {
   const { isAuthenticated, login, logout } = useUserStore();
+  const setOpenConnections = useModalStore((s) => s.setOpenConnections);
+
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className="Header">
@@ -30,7 +33,7 @@ export default function Header() {
               </button>
             </>
           ) : (
-            <button onClick={login} className="button">
+            <button onClick={() => setOpenConnections(true)} className="button">
               Se Connecter
             </button>
           )}
