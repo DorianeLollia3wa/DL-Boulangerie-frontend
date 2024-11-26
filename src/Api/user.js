@@ -41,7 +41,6 @@ export const userRegister = async ({ nom, email, mot_de_passe, telephone }) => {
       mot_de_passe,
       telephone,
     });
-    console.log("response : ", response.data);
     const { token, utilisateur } = response.data;
 
     localStorage.setItem("authToken", JSON.stringify(token));

@@ -1,0 +1,86 @@
+@import "../variables";
+
+.HomePage {
+  //   padding: 5vh;
+  position: relative;
+  .devanture img {
+    height: 90vh;
+    object-fit: cover;
+  }
+
+  .BoxText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); // Centre la BoxText
+    width: 80%; // Limite la largeur du texte
+    max-width: 800px; // Empêche le texte d'être trop large
+    padding: 20px;
+    z-index: 2; // Met le texte au-dessus de l'image
+
+    /* Style de fond flou */
+    background-color: rgba(255, 255, 255, 0.7); // Fond semi-transparent
+    backdrop-filter: blur(5px); // Effet de flou
+    border-radius: 10px; // Coins arrondis
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); // Légère ombre
+
+    /* Style du texte */
+    text-align: center; // Centre le texte horizontalement
+    color: #333;
+    section {
+      padding: 10px 0;
+    }
+    .boxbottom {
+      display: flex;
+      .promotions {
+        width: 60%;
+        padding-right: 20px;
+        text-align: left;
+      }
+      .horaires {
+        text-align: left;
+      }
+    }
+    h1,
+    h2 {
+      color: $darkBrown2;
+      padding: 5px 0;
+    }
+    h3 {
+      padding-top: 15px;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 10px;
+      }
+    }
+    strong {
+      color: $darkRed1;
+    }
+  }
+
+  @media (max-width: 580px) {
+    background-color: red;
+    .BoxText {
+      .boxbottom {
+        flex-direction: column;
+        .promotions {
+          width: 100%;
+          padding-right: 0px;
+          text-align: center;
+        }
+        .horaires {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

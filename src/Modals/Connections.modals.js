@@ -47,7 +47,13 @@ function Login({ setSeeLogin }) {
         <input
           type="email"
           id="email"
-          {...register("email", { required: "Email est requis" })}
+          {...register("email", {
+            required: "Email est requis",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Regex pour valider un email
+              message: "Veuillez entrer un email valide",
+            },
+          })}
         />
         {errors.email && <p>{errors.email.message}</p>}
       </div>
@@ -56,7 +62,18 @@ function Login({ setSeeLogin }) {
         <input
           type="password"
           id="mot_de_passe"
-          {...register("mot_de_passe", { required: "Mot de passe est requis" })}
+          {...register("mot_de_passe", {
+            required: "Mot de passe est requis",
+            minLength: {
+              value: 8,
+              message: "Le mot de passe doit contenir au moins 8 caractères",
+            },
+            pattern: {
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&#]{8,}$/,
+              message:
+                "Le mot de passe doit contenir au moins une majuscule, une minuscule, et un chiffre",
+            },
+          })}
         />
         {errors.mot_de_passe && <p>{errors.mot_de_passe.message}</p>}
       </div>
@@ -116,7 +133,13 @@ function Register({ setSeeLogin }) {
         <input
           type="email"
           id="email"
-          {...register("email", { required: "Email est requis" })}
+          {...register("email", {
+            required: "Email est requis",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Veuillez entrer un email valide",
+            },
+          })}
         />
         {errors.email && <p>{errors.email.message}</p>}
       </div>
@@ -136,7 +159,18 @@ function Register({ setSeeLogin }) {
         <input
           type="password"
           id="mot_de_passe"
-          {...register("mot_de_passe", { required: "Mot de passe est requis" })}
+          {...register("mot_de_passe", {
+            required: "Mot de passe est requis",
+            minLength: {
+              value: 8,
+              message: "Le mot de passe doit contenir au moins 8 caractères",
+            },
+            pattern: {
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&#]{8,}$/,
+              message:
+                "Le mot de passe doit contenir au moins une majuscule, une minuscule, et un chiffre",
+            },
+          })}
         />
         {errors.password && <p>{errors.password.message}</p>}
       </div>
