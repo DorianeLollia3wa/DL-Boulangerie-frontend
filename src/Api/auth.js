@@ -16,11 +16,12 @@ export const userLogout = () => {
 
 export const authTokenUser = async (userId) => {
   try {
-    const response = await axiosInstance.get(`/auth/AuthToken`);
+    const response = await axiosInstance.get(`utilisateurs/auth`);
 
     const user = response.data;
 
     const setUserData = useUserStore.getState().setUserData;
+
     setUserData(user);
 
     return user;

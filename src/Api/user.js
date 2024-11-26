@@ -6,15 +6,14 @@ import useUserStore from "../Stores/useUserStore";
 const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:3001";
 
 // Fonction pour gérer le login
-export const userLogin = async (data) => {
-  const { email, password } = data;
+export const userLogin = async ({ email, mot_de_passe }) => {
   try {
-    const response = await axios.post(`${API_URL}user/login`, {
+    const response = await axios.post(`${API_URL}utilisateurs/connexion`, {
       email,
-      password,
+      mot_de_passe,
     });
 
-    const { token, user } = response.data;
+    const { token, utilisateur } = response.data;
 
     localStorage.setItem("authToken", JSON.stringify(token));
 
@@ -22,7 +21,36 @@ export const userLogin = async (data) => {
     const setOpenConnections = useModalStore.getState().setOpenConnections;
     const login = useUserStore.getState().login;
 
-    setUserData(user);
+    setUserData(utilisateur);
+    login();
+    setOpenConnections(false);
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de la connexion:", error);
+    throw new Error(
+      error.response?.data?.message || "Erreur lors de la connexion"
+    );
+  }
+};
+
+export const userRegister = async ({ nom, email, mot_de_passe, telephone }) => {
+  try {
+    const response = await axios.post(`${API_URL}utilisateurs/inscription`, {
+      nom,
+      email,
+      mot_de_passe,
+      telephone,
+    });
+    console.log("response : ", response.data);
+    const { token, utilisateur } = response.data;
+
+    localStorage.setItem("authToken", JSON.stringify(token));
+
+    const setUserData = useUserStore.getState().setUserData;
+    const setOpenConnections = useModalStore.getState().setOpenConnections;
+    const login = useUserStore.getState().login;
+
+    setUserData(utilisateur);
     login();
     setOpenConnections(false);
     return response.data;

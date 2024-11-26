@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { userLogin } from "../Api/user";
+import { userLogin, userRegister } from "../Api/user";
 import useModalStore from "../Stores/useModalStore";
 import "../Styles/Modals/Connections.scss";
 
@@ -26,7 +26,9 @@ function Login({ setSeeLogin }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [message, setMessage] = useState("");
+
   async function onSubmit(data) {
     try {
       await userLogin(data);
@@ -50,13 +52,13 @@ function Login({ setSeeLogin }) {
         {errors.email && <p>{errors.email.message}</p>}
       </div>
       <div className="BoxInput">
-        <label htmlFor="password">Mot de passe</label>
+        <label htmlFor="mot_de_passe">Mot de passe</label>
         <input
           type="password"
-          id="password"
-          {...register("password", { required: "Mot de passe est requis" })}
+          id="mot_de_passe"
+          {...register("mot_de_passe", { required: "Mot de passe est requis" })}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.mot_de_passe && <p>{errors.mot_de_passe.message}</p>}
       </div>
 
       {message !== "" && <p className="error">{message}</p>}
@@ -81,32 +83,32 @@ function Register({ setSeeLogin }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Register Data:", data);
-  };
+  const [message, setMessage] = useState("");
+
+  async function onSubmit(data) {
+    try {
+      if (data.confirmer_mot_de_passe !== data.mot_de_passe) {
+        setMessage("Les mots de passe ne sont pas identique");
+      } else {
+        await userRegister(data);
+      }
+    } catch (error) {
+      setMessage(error.message);
+    }
+  }
 
   return (
     <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
       <h1>Créer un compte</h1>
 
       <div className="BoxInput">
-        <label htmlFor="name">Nom</label>
+        <label htmlFor="nom">Nom</label>
         <input
           type="text"
-          id="name"
-          {...register("name", { required: "Nom est requis" })}
+          id="nom"
+          {...register("nom", { required: "Nom est requis" })}
         />
         {errors.name && <p>{errors.name.message}</p>}
-      </div>
-
-      <div className="BoxInput">
-        <label htmlFor="surname">Prénom</label>
-        <input
-          type="text"
-          id="surname"
-          {...register("surname", { required: "Prénom est requis" })}
-        />
-        {errors.surname && <p>{errors.surname.message}</p>}
       </div>
 
       <div className="BoxInput">
@@ -120,24 +122,38 @@ function Register({ setSeeLogin }) {
       </div>
 
       <div className="BoxInput">
-        <label htmlFor="phone">Téléphone</label>
+        <label htmlFor="telephone">Téléphone</label>
         <input
           type="tel"
-          id="phone"
-          {...register("phone", { required: "Téléphone est requis" })}
+          id="telephone"
+          {...register("telephone", { required: "Téléphone est requis" })}
         />
         {errors.phone && <p>{errors.phone.message}</p>}
       </div>
 
       <div className="BoxInput">
-        <label htmlFor="password">Mot de passe</label>
+        <label htmlFor="mot_de_passe">Mot de passe</label>
         <input
           type="password"
-          id="password"
-          {...register("password", { required: "Mot de passe est requis" })}
+          id="mot_de_passe"
+          {...register("mot_de_passe", { required: "Mot de passe est requis" })}
         />
         {errors.password && <p>{errors.password.message}</p>}
       </div>
+
+      <div className="BoxInput">
+        <label htmlFor="confirmer_mot_de_passe">Confirmer mot de passe</label>
+        <input
+          type="password"
+          id="confirmer_mot_de_passe"
+          {...register("confirmer_mot_de_passe", {
+            required: "Mot de passe est requis",
+          })}
+        />
+        {errors.password && <p>{errors.password.message}</p>}
+      </div>
+
+      {message !== "" && <p className="error">{message}</p>}
 
       <button type="submit">Créer</button>
 
