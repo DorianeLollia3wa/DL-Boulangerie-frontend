@@ -3,18 +3,25 @@ import { useState } from "react";
 import logo from "../../Assets/logo/logo.png";
 import ImgBox from "../../Components/ImgBox";
 
+import { useNavigate } from "react-router-dom";
 import useModalStore from "../../Stores/useModalStore";
 import useUserStore from "../../Stores/useUserStore";
 import "../../Styles/Contents/Header.scss";
 
 export default function Header() {
+  let navigate = useNavigate();
   const { isAuthenticated, logout } = useUserStore();
   const setOpenConnections = useModalStore((s) => s.setOpenConnections);
 
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className="Header">
-      <ImgBox nameBox="logo" urlSrc={logo} desc="logo de la boulangerire" />
+      <ImgBox
+        nameBox="logo"
+        urlSrc={logo}
+        desc="logo de la boulangerire"
+        navlogo="/"
+      />
       <nav className="nav-links">
         <FontAwesomeIcon
           className="bars"
@@ -22,7 +29,7 @@ export default function Header() {
           onClick={() => setMenuOpen(!menuOpen)}
         />
         <ul className={menuOpen ? "open" : "close"}>
-          <li>Nos produits</li>
+          <li onClick={() => navigate("/nos-produits")}>Nos produits</li>
 
           {isAuthenticated ? (
             <>

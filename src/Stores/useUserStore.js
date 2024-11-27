@@ -1,6 +1,7 @@
 // src/Stores/userStore.js
 import { jwtDecode } from "jwt-decode";
-import create from "zustand";
+import { create } from "zustand";
+
 import { authTokenUser } from "../Api/auth";
 
 const useUserStore = create((set) => ({

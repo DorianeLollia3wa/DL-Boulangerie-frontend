@@ -6,7 +6,7 @@ import useUserStore from "../Stores/useUserStore";
 const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:3001";
 
 // Fonction pour gérer le login
-export const userLogin = async ({ email, mot_de_passe }) => {
+export async function userLogin({ email, mot_de_passe }) {
   try {
     const response = await axios.post(`${API_URL}utilisateurs/connexion`, {
       email,
@@ -31,9 +31,10 @@ export const userLogin = async ({ email, mot_de_passe }) => {
       error.response?.data?.message || "Erreur lors de la connexion"
     );
   }
-};
+}
 
-export const userRegister = async ({ nom, email, mot_de_passe, telephone }) => {
+// Fonction pour gérer l'inscription
+export async function userRegister({ nom, email, mot_de_passe, telephone }) {
   try {
     const response = await axios.post(`${API_URL}utilisateurs/inscription`, {
       nom,
@@ -59,4 +60,4 @@ export const userRegister = async ({ nom, email, mot_de_passe, telephone }) => {
       error.response?.data?.message || "Erreur lors de la connexion"
     );
   }
-};
+}

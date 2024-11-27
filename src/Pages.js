@@ -12,6 +12,7 @@ import HomePage from "./Pages/HomePage";
 // Icon fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import AllModalsContainer from "./Modals/AllModalContainter";
+import Produits from "./Pages/Produits";
 library.add(FontAwesomeIcons);
 
 export default function Pages() {
@@ -21,6 +22,7 @@ export default function Pages() {
       <AllModalsContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/nos-produits" element={<Produits />} />
       </Routes>
     </div>
   );
