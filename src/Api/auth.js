@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import useUserStore from "../Stores/useUserStore";
 import axiosInstance from "./axiosConfig";
 
@@ -26,13 +27,13 @@ export const authTokenUser = async (userId) => {
 
     return user;
   } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des données utilisateur :",
-      error
-    );
-    throw new Error(
-      error.response?.data?.message ||
-        "Erreur lors de la récupération des données utilisateur"
-    );
+    toast.error("Erreur lors de la récupération des données utilisateur", {
+      position: "top-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 };
