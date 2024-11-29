@@ -2,6 +2,7 @@
 import { jwtDecode } from "jwt-decode";
 import { create } from "zustand";
 
+import { toast } from "react-toastify";
 import { authTokenUser } from "../Api/auth";
 
 const useUserStore = create((set) => ({
@@ -18,7 +19,7 @@ const useUserStore = create((set) => ({
   },
 
   // Vérifie si un token existe et récupère les données utilisateur
-  checkAuthToken: async () => {
+  checkAuthToken: async (navigate) => {
     const token = JSON.parse(localStorage.getItem("authToken"));
     if (token) {
       try {
@@ -34,7 +35,12 @@ const useUserStore = create((set) => ({
           "Erreur lors de la récupération des données utilisateur",
           error
         );
+        navigate("/");
         set({ isAuthenticated: false });
+        toast.error("Session expirée, veuillez vous reconnecter.", {
+          position: "top-left",
+          autoClose: 3000,
+        });
       }
     }
   },

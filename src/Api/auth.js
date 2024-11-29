@@ -15,7 +15,7 @@ export const userLogout = () => {
   logout();
 };
 
-export const authTokenUser = async (userId) => {
+export const authTokenUser = async (navigate) => {
   try {
     const response = await axiosInstance.get(`utilisateurs/auth`);
 
@@ -27,7 +27,10 @@ export const authTokenUser = async (userId) => {
 
     return user;
   } catch (error) {
-    toast.error("Erreur lors de la récupération des données utilisateur", {
+    const logout = useUserStore.getState().logout;
+    logout();
+
+    toast.error("Atuh Erreur lors de la récupération des données utilisateur", {
       position: "top-left",
       autoClose: 3000,
       hideProgressBar: false,
@@ -35,5 +38,7 @@ export const authTokenUser = async (userId) => {
       draggable: true,
       progress: undefined,
     });
+
+    navigate("/");
   }
 };

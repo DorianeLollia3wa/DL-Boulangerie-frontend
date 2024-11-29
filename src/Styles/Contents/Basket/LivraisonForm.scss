@@ -1,4 +1,7 @@
+@import "../../variables";
+
 .LivraisonForm {
+  min-width: 350px;
   .Total,
   .delivery {
     padding: 10px 20px;
@@ -13,5 +16,27 @@
         padding-bottom: 40px;
       }
     }
+  }
+  p,
+  .adresse-item,
+  .choix-delivery {
+    padding-top: 10px;
+  }
+
+  button {
+    margin-top: 20px;
+
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
+    left: 50%; /* Positionne le bouton à 50% de la largeur */
+    transform: translateX(-50%);
+  }
+  .error {
+    text-align: center;
+    color: $darkRed1;
+  }
+
+  @media (max-width: 900px) {
   }
 }

@@ -148,12 +148,12 @@ function BoxProduit({ product }) {
             <i>{categorie.nom_categorie}</i>
           </p>
           <p className="prix">{prix.toFixed(2)} €</p>
-
-          {isAuthenticated && stock_disponible > 0 ? (
+          {isAuthenticated && stock_disponible > 0 && (
             <button onClick={handleAddToBasket}>
               <FontAwesomeIcon icon="fa-solid fa-cart-shopping" />
             </button>
-          ) : (
+          )}
+          {stock_disponible <= 0 && (
             <p className="stock-out">Rupture de stock</p>
           )}
         </div>
