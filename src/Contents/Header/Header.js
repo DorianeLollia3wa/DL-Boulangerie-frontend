@@ -33,7 +33,7 @@ export default function Header() {
 
           {isAuthenticated ? (
             <>
-              <li>Mon panier</li>
+              <li onClick={() => navigate("/mon-panier")}>Mon panier</li>
               <li>Mes Commandes</li>
               <button onClick={logout} className="button">
                 Se Déconnecter

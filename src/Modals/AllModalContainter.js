@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import useModalStore from "../Stores/useModalStore";
+import AdresseForm from "./AdresseForm.modal";
 import Connections from "./Connections.modals";
 
 export default function AllModalsContainer() {
@@ -24,6 +25,7 @@ export default function AllModalsContainer() {
   return (
     <div ref={allmodalContainerRef}>
       <Connections />
+      <AdresseForm />
     </div>
   );
 }

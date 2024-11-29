@@ -1,8 +1,9 @@
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Pages from "./Pages";
 import useUserStore from "./Stores/useUserStore";
-
 function App() {
   const checkAuthToken = useUserStore((state) => state.checkAuthToken);
 
@@ -12,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <Pages />
+      <Pages /> <ToastContainer />
     </div>
   );
 }

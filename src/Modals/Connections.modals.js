@@ -76,7 +76,7 @@ function Login({ setSeeLogin }) {
       <button
         className="changeForm"
         type="button"
-        onClick={() => setSeeLogin(false)} // Basculer vers le formulaire de création de compte
+        onClick={() => setSeeLogin(false)}
       >
         Pas de compte ? Créer un compte
       </button>
@@ -185,7 +185,7 @@ function Register({ setSeeLogin }) {
       <button
         className="changeForm"
         type="button"
-        onClick={() => setSeeLogin(true)} // Basculer vers le formulaire de connexion
+        onClick={() => setSeeLogin(true)}
       >
         Déjà un compte ? Se connecter !
       </button>

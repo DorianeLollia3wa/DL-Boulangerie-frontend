@@ -1,0 +1,47 @@
+@import "../variables";
+
+.Basket {
+  h1 {
+    text-align: center;
+    padding: 20px 0;
+  }
+  padding: 20px 40px;
+  section {
+    display: flex;
+  }
+  .detailProduct {
+    flex: 1;
+    border: 1px gray solid;
+    padding: 10px;
+    border-radius: 20px;
+    margin-right: 20px;
+    article {
+      display: flex;
+      align-items: center;
+      .product-image {
+        width: 200px;
+        min-width: 200px;
+        height: 200px;
+        min-height: 200px;
+        margin-right: 15px;
+
+        img {
+          overflow: hidden;
+          border-radius: 10px;
+          object-fit: cover;
+        }
+      }
+
+      h5,
+      p {
+        padding: 15px 0;
+      }
+
+      .Box1,
+      .Box2 {
+        // padding-right: 40px;
+        flex: 1;
+      }
+    }
+  }
+}

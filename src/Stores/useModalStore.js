@@ -7,8 +7,10 @@ const useModalStore = create((set, get) => {
 
   return {
     openConnections: false, // État de la modal Connections.modals.js login/register
-
     setOpenConnections: setter("openConnections"),
+
+    openAdresseForm: false,
+    setOpenAdresseForm: setter("openAdresseForm"),
 
     closeAllModals: () => {
       const state = get();

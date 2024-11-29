@@ -1,0 +1,17 @@
+.LivraisonForm {
+  .Total,
+  .delivery {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid gray;
+  }
+  .delivery {
+    .new-address {
+      h6 {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+    }
+  }
+}

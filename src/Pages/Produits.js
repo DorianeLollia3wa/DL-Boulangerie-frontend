@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 
+import { toast } from "react-toastify";
 import { getAllCategory } from "../Api/category";
 import { getAllProduct } from "../Api/product";
 import ImgBox from "../Components/ImgBox";
+import useProduitStore from "../Stores/useProduitStore";
 import useUserStore from "../Stores/useUserStore";
 import "../Styles/Pages/Produits.scss";
 
@@ -52,6 +54,7 @@ export default function Produits() {
   return (
     <div className="Produits">
       <h1>Nos Produits</h1>
+
       {/* Barre de recherche et sélecteur */}
       <div className="search-filters">
         <input
@@ -99,8 +102,41 @@ function BoxProduit({ product }) {
     categorie,
     image_product,
     prix,
+    stock_disponible,
   } = product;
   const { isAuthenticated } = useUserStore();
+  const addBasket = useProduitStore((state) => state.addBasket);
+  const { basket } = useProduitStore();
+
+  function handleAddToBasket() {
+    const existingItem = basket.find(
+      (item) => item.id_Produits === id_Produits
+    );
+    const currentQuantity = existingItem ? existingItem.quantity : 0;
+    if (currentQuantity >= stock_disponible) {
+      toast.error(
+        `Quantité trop élevée. Stock disponible : ${stock_disponible}`,
+        {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          pauseOnHover: true,
+          draggable: true,
+        }
+      );
+      return;
+    }
+
+    addBasket(product);
+    toast.success(`${nom} a été ajouté au panier !`, {
+      position: "top-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
   return (
     <article className="box-produit">
       <ImgBox nameBox="product-image" urlSrc={`${image_product}`} />
@@ -110,12 +146,15 @@ function BoxProduit({ product }) {
         <div className="bottomBox">
           <p className="category">
             <i>{categorie.nom_categorie}</i>
-          </p>{" "}
-          <p className="prix">{prix} €</p>
-          {isAuthenticated && (
-            <button>
+          </p>
+          <p className="prix">{prix.toFixed(2)} €</p>
+
+          {isAuthenticated && stock_disponible > 0 ? (
+            <button onClick={handleAddToBasket}>
               <FontAwesomeIcon icon="fa-solid fa-cart-shopping" />
             </button>
+          ) : (
+            <p className="stock-out">Rupture de stock</p>
           )}
         </div>
       </div>
