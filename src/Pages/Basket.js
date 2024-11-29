@@ -1,53 +1,77 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllProduct } from "../Api/product";
 import ImgBox from "../Components/ImgBox";
 import LivraisonForm from "../Contents/Basket/LivraisonForm";
 import useProduitStore from "../Stores/useProduitStore";
 import "../Styles/Pages/Basket.scss";
 
 export default function Basket() {
-  const { basket } = useProduitStore();
+  const { basket, verifyAndUpdateBasket } = useProduitStore();
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    let intervalId;
+
+    if (basket.length > 0) {
+      intervalId = setInterval(async () => {
+        try {
+          const products = await getAllProduct();
+          verifyAndUpdateBasket(products);
+        } catch (error) {
+          console.error(
+            "Erreur lors de la vérification des produits : ",
+            error
+          );
+          setErrorMessage("Erreur lors de la synchronisation du panier.");
+        }
+      }, 5000);
+    }
+
+    // Fonction de nettoyage
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [basket, verifyAndUpdateBasket]);
 
   return (
     <div className="Basket">
       <h1>Récapitulatif de mon panier</h1>
+      {errorMessage && <p className="error">{errorMessage}</p>}
       <section>
         <div className="detailProduct">
           {basket.length > 0 ? (
-            basket.map((elm, i) => {
-              return (
-                <React.Fragment key={elm.id_Produits}>
-                  <Product product={elm} />
-                  {basket.length - 1 !== i && <hr />}
-                </React.Fragment>
-              );
-            })
+            basket.map((elm, i) => (
+              <React.Fragment key={elm.id_Produits}>
+                <Product product={elm} />
+                {basket.length - 1 !== i && <hr />}
+              </React.Fragment>
+            ))
           ) : (
             <p>Le panier est vide</p>
           )}
         </div>
-
         <LivraisonForm />
       </section>
     </div>
   );
 }
+
 function Product({ product }) {
   const { id_Produits, nom, image_product, prix, stock_disponible, quantity } =
     product;
 
-  const updateBasket = useProduitStore((s) => s.updateBasket); // Fonction pour mettre à jour la quantité
-  const removeBasket = useProduitStore((s) => s.removeBasket); // Fonction pour supprimer un produit
-  let prixFixe = prix.toFixed(2) * quantity;
+  const updateBasket = useProduitStore((s) => s.updateBasket);
+  const removeBasket = useProduitStore((s) => s.removeBasket);
+  const prixFixe = prix.toFixed(2) * quantity;
 
-  // Augmenter la quantité
   const increaseQuantity = () => {
     if (quantity < stock_disponible) {
       updateBasket(id_Produits, quantity + 1);
     }
   };
 
-  // Diminuer la quantité
   const decreaseQuantity = () => {
     if (quantity > 1) {
       updateBasket(id_Produits, quantity - 1);
