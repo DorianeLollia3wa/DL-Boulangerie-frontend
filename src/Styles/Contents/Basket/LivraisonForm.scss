@@ -40,3 +40,19 @@
   @media (max-width: 900px) {
   }
 }
+.PaymentBox {
+  margin: auto;
+  padding: 30px 20px;
+  border: 1px solid $darkBrown1;
+  border-radius: 20px;
+
+  button {
+    margin-top: 20px;
+
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
+    left: 50%; /* Positionne le bouton à 50% de la largeur */
+    transform: translateX(-50%);
+  }
+}

@@ -6,6 +6,9 @@ import "./Styles/Pages.scss";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { FontAwesomeIcons } from "./Assets/awesomeIcon";
 
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
 // Modals
 import AllModalsContainer from "./Modals/AllModalContainter";
 
@@ -27,6 +30,10 @@ function PrivateRoute({ children }) {
   return isAuthenticated ? children : <Navigate to="/" />;
 }
 
+const stripePromise = loadStripe(
+  "pk_test_51QO09uDIAAOoq1W24May2ehGLHJDw5qPJHJYWkAucBvr2OMWMm3wP5Y6ByrqoXvlPjX9hcmsPPRxDdu93dPjpKly00CTvyXHI4"
+);
+
 export default function Pages() {
   return (
     <div className="Pages">
@@ -40,7 +47,9 @@ export default function Pages() {
           path="/mon-panier"
           element={
             <PrivateRoute>
-              <Basket />
+              <Elements stripe={stripePromise}>
+                <Basket />
+              </Elements>
             </PrivateRoute>
           }
         />

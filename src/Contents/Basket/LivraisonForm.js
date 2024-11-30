@@ -7,8 +7,9 @@ import { calculBasket } from "../../Api/commande";
 import { getAllFraisLiv } from "../../Api/fraisLiv";
 import useProduitStore from "../../Stores/useProduitStore";
 import "../../Styles/Contents/Basket/LivraisonForm.scss";
+import PaymentForm from "./PaymentForm";
 
-export default function LivraisonForm() {
+export default function LivraisonForm({ setIsProcessing }) {
   const { basket } = useProduitStore();
   const { register, handleSubmit, watch, control } = useForm();
   const livraisonOption = watch("livraison", "retrait");
@@ -19,6 +20,8 @@ export default function LivraisonForm() {
   const [newAddress, setNewAddress] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [total, setTotal] = useState(0);
+
+  const [showPayment, setShowPayment] = useState(false);
 
   // Prix des produits
   const prixProduits = basket.reduce(
@@ -99,7 +102,9 @@ export default function LivraisonForm() {
     }
   }, [basket, livraisonOption, villeNouvelle, adresseExistante]);
 
-  const onSubmit = (data) => {
+  async function onSubmit(data) {
+    setIsProcessing(true);
+
     const panier = basket.map((item) => ({
       id_Produits: item.id_Produits,
       quantite: item.quantity,
@@ -110,7 +115,7 @@ export default function LivraisonForm() {
         ? `${data.adresseNouvelle} ${data.codePostalNouvelle} ${data.villeNouvelle.value} ${data.paysNouvelle}`
         : `${
             allAdresse.find((adresse) => adresse.ville === adresseExistante)
-              .adresse
+              ?.adresse
           }, ${adresseExistante}`,
       ville_liv: newAddress ? data.villeNouvelle.value : adresseExistante,
       type_livraison:
@@ -121,17 +126,27 @@ export default function LivraisonForm() {
       panier,
     };
 
-    console.log("Commande soumise : ", commande);
+    try {
+      // Envoyer la commande au backend
+      console.log("Commande soumise : ", commande);
 
-    toast.success("Commande validée !", {
-      position: "top-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      pauseOnHover: true,
-      draggable: true,
-    });
-  };
-
+      setShowPayment(true);
+    } catch (error) {
+      console.error("Erreur lors de la soumission de la commande : ", error);
+      toast.error("Une erreur est survenue lors du traitement.");
+      setIsProcessing(false);
+    }
+  }
+  if (showPayment) {
+    return (
+      <div className="PaymentBox">
+        <PaymentForm
+          total={total}
+          onPaymentSuccess={() => setShowPayment(false)}
+        />
+      </div>
+    );
+  }
   return (
     <form className="LivraisonForm" onSubmit={handleSubmit(onSubmit)}>
       <div className="delivery">

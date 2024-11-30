@@ -8,6 +8,7 @@ import "../Styles/Pages/Basket.scss";
 
 export default function Basket() {
   const { basket, verifyAndUpdateBasket } = useProduitStore();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -37,22 +38,34 @@ export default function Basket() {
 
   return (
     <div className="Basket">
-      <h1>Récapitulatif de mon panier</h1>
+      {!isProcessing ? (
+        <h1>Récapitulatif de mon panier</h1>
+      ) : (
+        <h1>Paiement de la commande</h1>
+      )}
       {errorMessage && <p className="error">{errorMessage}</p>}
+
       <section>
-        <div className="detailProduct">
-          {basket.length > 0 ? (
-            basket.map((elm, i) => (
-              <React.Fragment key={elm.id_Produits}>
-                <Product product={elm} />
-                {basket.length - 1 !== i && <hr />}
-              </React.Fragment>
-            ))
-          ) : (
-            <p>Le panier est vide</p>
-          )}
-        </div>
-        <LivraisonForm />
+        {!isProcessing && (
+          <div className="detailProduct">
+            {basket.length > 0 ? (
+              basket.map((elm, i) => (
+                <React.Fragment key={elm.id_Produits}>
+                  <Product product={elm} />
+                  {basket.length - 1 !== i && <hr />}
+                </React.Fragment>
+              ))
+            ) : (
+              <p>Le panier est vide</p>
+            )}
+          </div>
+        )}
+        {basket.length > 0 && (
+          <LivraisonForm
+            isProcessing={isProcessing}
+            setIsProcessing={setIsProcessing}
+          />
+        )}
       </section>
     </div>
   );
