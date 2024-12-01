@@ -130,10 +130,7 @@ export default function LivraisonForm({ showPayment, setShowPayment }) {
     };
 
     try {
-      // Envoyer la commande au backend
-      console.log("Commande soumise : ", commande);
       setCommandeData(commande);
-
       setShowPayment(true);
     } catch (error) {
       console.error("Erreur lors de la soumission de la commande : ", error);

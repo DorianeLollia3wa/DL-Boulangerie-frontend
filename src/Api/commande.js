@@ -28,10 +28,10 @@ export async function createCommande(data) {
       `${API_URL}commandes/creer`,
       data
     );
-    console.log("response : ", response);
+
     return response.data.total;
   } catch (error) {
-    console.log("error.message : ", error.message);
+    // console.log("error.message : ", error.message);
     toast.error("Erreur lors de la création de la commande", {
       position: "top-left",
       autoClose: 3000,
