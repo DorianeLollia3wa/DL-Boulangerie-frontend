@@ -9,7 +9,7 @@ import useProduitStore from "../../Stores/useProduitStore";
 import "../../Styles/Contents/Basket/LivraisonForm.scss";
 import PaymentForm from "./PaymentForm";
 
-export default function LivraisonForm({ setIsProcessing }) {
+export default function LivraisonForm({ showPayment, setShowPayment }) {
   const { basket } = useProduitStore();
   const { register, handleSubmit, watch, control } = useForm();
   const livraisonOption = watch("livraison", "retrait");
@@ -21,7 +21,7 @@ export default function LivraisonForm({ setIsProcessing }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [total, setTotal] = useState(0);
 
-  const [showPayment, setShowPayment] = useState(false);
+  const [commandeData, setCommandeData] = useState(null);
 
   // Prix des produits
   const prixProduits = basket.reduce(
@@ -103,8 +103,6 @@ export default function LivraisonForm({ setIsProcessing }) {
   }, [basket, livraisonOption, villeNouvelle, adresseExistante]);
 
   async function onSubmit(data) {
-    setIsProcessing(true);
-
     const panier = basket.map((item) => ({
       id_Produits: item.id_Produits,
       quantite: item.quantity,
@@ -117,7 +115,12 @@ export default function LivraisonForm({ setIsProcessing }) {
             allAdresse.find((adresse) => adresse.ville === adresseExistante)
               ?.adresse
           }, ${adresseExistante}`,
-      ville_liv: newAddress ? data.villeNouvelle.value : adresseExistante,
+      ville_liv:
+        livraisonOption === "retrait" // Si retrait, ville_liv est "boulangerieLorrez"
+          ? "boulangerieLorrez"
+          : newAddress
+          ? data.villeNouvelle.value
+          : adresseExistante,
       type_livraison:
         livraisonOption === "retrait"
           ? "Retrait sur place"
@@ -129,19 +132,21 @@ export default function LivraisonForm({ setIsProcessing }) {
     try {
       // Envoyer la commande au backend
       console.log("Commande soumise : ", commande);
+      setCommandeData(commande);
 
       setShowPayment(true);
     } catch (error) {
       console.error("Erreur lors de la soumission de la commande : ", error);
       toast.error("Une erreur est survenue lors du traitement.");
-      setIsProcessing(false);
+      setShowPayment(false);
     }
   }
-  if (showPayment) {
+  if (showPayment && commandeData !== null) {
     return (
       <div className="PaymentBox">
         <PaymentForm
           total={total}
+          commandeData={commandeData}
           onPaymentSuccess={() => setShowPayment(false)}
         />
       </div>

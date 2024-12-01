@@ -5,10 +5,17 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { createCommande } from "../../Api/commande";
+import useProduitStore from "../../Stores/useProduitStore";
 import "../../Styles/Contents/Basket/PaymentForm.scss";
-export default function PaymentForm({ total, onPaymentSuccess }) {
+
+export default function PaymentForm({ total, commandeData, onPaymentSuccess }) {
+  let navigate = useNavigate();
+  const clearBasket = useProduitStore((state) => state.clearBasket);
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -39,7 +46,15 @@ export default function PaymentForm({ total, onPaymentSuccess }) {
         toast.error("Erreur lors du paiement : " + result.error.message);
       } else {
         toast.success("Paiement validé !");
-        onPaymentSuccess(result.paymentMethod.id);
+        const updatedCommande = {
+          ...commandeData,
+          libelle_paiement: result.paymentMethod.id,
+        };
+
+        await createCommande(updatedCommande);
+        clearBasket();
+        toast.success("Commande créer avec succès !");
+        navigate("/");
       }
     } catch (error) {
       toast.error("Une erreur est survenue : " + error.message);

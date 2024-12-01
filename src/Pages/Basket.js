@@ -8,14 +8,13 @@ import "../Styles/Pages/Basket.scss";
 
 export default function Basket() {
   const { basket, verifyAndUpdateBasket } = useProduitStore();
-  const [isProcessing, setIsProcessing] = useState(false);
-
+  const [showPayment, setShowPayment] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     let intervalId;
 
-    if (basket.length > 0) {
+    if (basket.length > 0 && !showPayment) {
       intervalId = setInterval(async () => {
         try {
           const products = await getAllProduct();
@@ -34,19 +33,15 @@ export default function Basket() {
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [basket, verifyAndUpdateBasket]);
+  }, [basket, verifyAndUpdateBasket, showPayment]);
 
   return (
     <div className="Basket">
-      {!isProcessing ? (
-        <h1>Récapitulatif de mon panier</h1>
-      ) : (
-        <h1>Paiement de la commande</h1>
-      )}
+      {!showPayment ? <h1>Récapitulatif</h1> : <h1>Paiement de la commande</h1>}
       {errorMessage && <p className="error">{errorMessage}</p>}
 
       <section>
-        {!isProcessing && (
+        {!showPayment && (
           <div className="detailProduct">
             {basket.length > 0 ? (
               basket.map((elm, i) => (
@@ -62,8 +57,8 @@ export default function Basket() {
         )}
         {basket.length > 0 && (
           <LivraisonForm
-            isProcessing={isProcessing}
-            setIsProcessing={setIsProcessing}
+            showPayment={showPayment}
+            setShowPayment={setShowPayment}
           />
         )}
       </section>

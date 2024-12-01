@@ -23,6 +23,7 @@ const useProduitStore = create((set) => ({
         return { basket: [...state.basket, { ...product, quantity: 1 }] };
       }
     }),
+
   updateBasket: (id_Produits, newQuantity) =>
     set((state) => ({
       basket: state.basket.map((item) =>
@@ -31,6 +32,13 @@ const useProduitStore = create((set) => ({
           : item
       ),
     })),
+
+  // Vider complètement le panier
+  clearBasket: () =>
+    set(() => ({
+      basket: [],
+    })),
+
   // Supprimer un produit du panier
   removeBasket: (productId) =>
     set((state) => ({

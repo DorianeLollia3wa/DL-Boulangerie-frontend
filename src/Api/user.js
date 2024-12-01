@@ -63,8 +63,13 @@ export async function userRegister({ nom, email, mot_de_passe, telephone }) {
     return response.data;
   } catch (error) {
     console.error("Erreur lors de la connexion:", error);
-    throw new Error(
-      error.response?.data?.message || "Erreur lors de la connexion"
-    );
+    toast.error("Erreur lors de la connexion", {
+      position: "top-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
