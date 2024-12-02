@@ -60,6 +60,14 @@ export default function Pages() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/gestion"
+          element={
+            <PrivateRoute>
+              <Commande />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );
