@@ -23,6 +23,7 @@ export default function Commande() {
             <th>Date</th>
             <th>Montant</th>
             <th>Statut</th>
+            <th>Livraison</th>
             <th>Adresse</th>
           </tr>
         </thead>
@@ -36,13 +37,8 @@ export default function Commande() {
                     {new Date(commande.date_commande).toLocaleDateString()}
                   </td>
                   <td>{commande.total.toFixed(2)} €</td>
-                  <td>
-                    {
-                      commande.id_Status_de_commande === 1
-                        ? "Préparation (en cours)"
-                        : "Livraison (terminée)" // Ajouter d'autres statuts si nécessaires
-                    }
-                  </td>
+                  <td>{commande.status.statut_commande}</td>
+                  <td>{commande.typeLivraison.type_livraison}</td>
                   <td>
                     {commande.adresseCommande === "undefined, null"
                       ? "Retrait sur place"
