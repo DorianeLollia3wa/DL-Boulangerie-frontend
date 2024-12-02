@@ -2,21 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import { toast } from "react-toastify";
-import { getAllAdresses } from "../../Api/adresse";
 import { calculBasket } from "../../Api/commande";
 import { getAllFraisLiv } from "../../Api/fraisLiv";
+import useModalStore from "../../Stores/useModalStore";
 import useProduitStore from "../../Stores/useProduitStore";
+import useUserStore from "../../Stores/useUserStore";
 import "../../Styles/Contents/Basket/LivraisonForm.scss";
 import PaymentForm from "./PaymentForm";
 
 export default function LivraisonForm({ showPayment, setShowPayment }) {
   const { basket } = useProduitStore();
+  const setOpenAdresseForm = useModalStore((s) => s.setOpenAdresseForm);
+  const { allAdresse, fetchAllAdresses } = useUserStore();
+
   const { register, handleSubmit, watch, control } = useForm();
+
   const livraisonOption = watch("livraison", "retrait");
   const villeNouvelle = watch("villeNouvelle", null);
   const adresseExistante = watch("adresse", null); // Pour surveiller l'adresse existante
+
   const [fraisLiv, setFraisLiv] = useState([]);
-  const [allAdresse, setAllAdresse] = useState([]);
   const [newAddress, setNewAddress] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [total, setTotal] = useState(0);
@@ -49,8 +54,7 @@ export default function LivraisonForm({ showPayment, setShowPayment }) {
         }));
         setFraisLiv(formattedFraisLiv);
 
-        const reqAdresse = await getAllAdresses();
-        setAllAdresse(reqAdresse);
+        await fetchAllAdresses();
       } catch (error) {
         setErrorMessage(error.message);
       }
@@ -248,6 +252,11 @@ export default function LivraisonForm({ showPayment, setShowPayment }) {
                     Ecrire l'adresse
                   </button>
                 </div>
+              )}
+              {allAdresse.length <= 3 && (
+                <button type="button" onClick={() => setOpenAdresseForm(true)}>
+                  Enregistrer une adresse
+                </button>
               )}
             </>
           )}

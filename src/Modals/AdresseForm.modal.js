@@ -5,10 +5,12 @@ import { toast } from "react-toastify";
 import { addAdresses } from "../Api/adresse";
 import { getAllFraisLiv } from "../Api/fraisLiv";
 import useModalStore from "../Stores/useModalStore";
+import useUserStore from "../Stores/useUserStore";
 import "../Styles/Modals/AdresseForm.scss";
 
 export default function AdresseForm() {
   const { openAdresseForm, setOpenAdresseForm } = useModalStore();
+  const { fetchAllAdresses } = useUserStore();
 
   const {
     register,
@@ -54,7 +56,7 @@ export default function AdresseForm() {
         progress: undefined,
       });
     }
-
+    await fetchAllAdresses();
     setOpenAdresseForm(false);
   }
 
@@ -134,7 +136,7 @@ export default function AdresseForm() {
 
       {/* Bouton de soumission */}
       <button type="submit" className="submit-button">
-        Créer l'adresse
+        Enregistrer l'adresse
       </button>
 
       {/* Affichage des erreurs générales */}

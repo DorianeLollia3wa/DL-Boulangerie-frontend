@@ -53,10 +53,24 @@
         button {
           width: 24px;
           height: 24px;
+          .icon {
+            font-size: 12px;
+          }
         }
       }
     }
   }
+
+  button {
+    background-color: $clearBrown1;
+    text-align: center;
+    color: white;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: $clearOrange1;
+    }
+  }
+
   @media (max-width: 900px) {
     section {
       flex-direction: column;

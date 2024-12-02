@@ -96,7 +96,7 @@ function Product({ product }) {
         <div className="quantity-controls">
           {quantity <= 1 ? (
             <button onClick={() => removeBasket(id_Produits)}>
-              <FontAwesomeIcon icon="fa-solid fa-trash-can" />
+              <FontAwesomeIcon className="icon" icon="fa-solid fa-trash-can" />
             </button>
           ) : (
             <button onClick={decreaseQuantity} disabled={quantity <= 1}>

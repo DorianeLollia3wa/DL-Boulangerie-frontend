@@ -3,11 +3,14 @@ import { jwtDecode } from "jwt-decode";
 import { create } from "zustand";
 
 import { toast } from "react-toastify";
+import { getAllAdresses } from "../Api/adresse";
 import { authTokenUser } from "../Api/auth";
 
 const useUserStore = create((set) => ({
   userData: null,
   isAuthenticated: false,
+
+  allAdresse: [],
 
   setUserData: (user) => set({ userData: user }),
 
@@ -42,6 +45,15 @@ const useUserStore = create((set) => ({
           autoClose: 3000,
         });
       }
+    }
+  },
+
+  fetchAllAdresses: async () => {
+    try {
+      const adresses = await getAllAdresses();
+      set({ allAdresse: adresses });
+    } catch (error) {
+      console.error("Erreur lors de la récupération des adresses :", error);
     }
   },
 }));
