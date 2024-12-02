@@ -35,14 +35,20 @@ export default function Header() {
             <>
               <li onClick={() => navigate("/mon-panier")}>Mon panier</li>
               <li onClick={() => navigate("/mes-commandes")}>Mes Commandes</li>
-              <button onClick={logout} className="button">
-                Se Déconnecter
-              </button>
+
+              <FontAwesomeIcon
+                onClick={logout}
+                className="disconect"
+                color="red"
+                icon="fa-solid fa-arrow-right-from-bracket"
+              />
             </>
           ) : (
-            <button onClick={() => setOpenConnections(true)} className="button">
-              Se Connecter
-            </button>
+            <FontAwesomeIcon
+              onClick={() => setOpenConnections(true)}
+              className="login"
+              icon="fa-solid fa-right-to-bracket"
+            />
           )}
         </ul>
       </nav>

@@ -11,7 +11,25 @@
     width: 200px;
     cursor: pointer;
   }
+  .disconect {
+    color: $darkRed1;
+  }
+  .login {
+    color: green;
+  }
 
+  .login,
+  .disconect {
+    cursor: pointer;
+    font-size: 24px;
+    width: 30px;
+
+    transition: all 0.3s ease;
+    &:hover {
+      font-size: 25px;
+      color: $clearBrown1;
+    }
+  }
   .nav-links {
     .bars {
       display: none;

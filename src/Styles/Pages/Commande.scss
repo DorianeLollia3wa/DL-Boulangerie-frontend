@@ -1,0 +1,45 @@
+@import "../variables";
+
+.Commande {
+  padding: 20px;
+  h1 {
+    text-align: center;
+    padding: 20px 0;
+    color: $darkBrown2;
+  }
+  .commande-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    thead {
+      border-radius: 20px;
+      overflow: hidden;
+      background-color: red;
+    }
+    th,
+    td {
+      //   border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: $clearPink2;
+      font-weight: bold;
+    }
+
+    tr {
+      &:nth-child(even) {
+        background-color: $clearPink1;
+      }
+
+      &:hover {
+        background-color: #f1f1f1;
+      }
+    }
+
+    td {
+      vertical-align: middle;
+    }
+  }
+}

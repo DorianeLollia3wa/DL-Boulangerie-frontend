@@ -62,7 +62,8 @@ const useUserStore = create((set) => ({
   fetchAllCommandes: async () => {
     try {
       const commande = await getAllCommandes();
-      set({ allCommande: commande });
+
+      set({ allCommande: commande.reverse() });
     } catch (error) {
       console.error("Erreur lors de la récupération des commande :", error);
     }
