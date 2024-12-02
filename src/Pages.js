@@ -21,6 +21,7 @@ import Produits from "./Pages/Produits";
 
 // Icon fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
+import Commande from "./Pages/Commande";
 library.add(FontAwesomeIcons);
 
 function PrivateRoute({ children }) {
@@ -30,9 +31,7 @@ function PrivateRoute({ children }) {
   return isAuthenticated ? children : <Navigate to="/" />;
 }
 
-const stripePromise = loadStripe(
-  "pk_test_51QO09uDIAAOoq1W24May2ehGLHJDw5qPJHJYWkAucBvr2OMWMm3wP5Y6ByrqoXvlPjX9hcmsPPRxDdu93dPjpKly00CTvyXHI4"
-);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 export default function Pages() {
   return (
@@ -50,6 +49,14 @@ export default function Pages() {
               <Elements stripe={stripePromise}>
                 <Basket />
               </Elements>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/mes-commandes"
+          element={
+            <PrivateRoute>
+              <Commande />
             </PrivateRoute>
           }
         />

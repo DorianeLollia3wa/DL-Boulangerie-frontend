@@ -30,10 +30,8 @@ export default function PaymentForm({ total, commandeData, onPaymentSuccess }) {
     setIsProcessing(true);
 
     try {
-      // Simulez un processus de validation avec Stripe sans backend
       const cardNumberElement = elements.getElement(CardNumberElement);
 
-      // Créez un PaymentMethod
       const result = await stripe.createPaymentMethod({
         type: "card",
         card: cardNumberElement,
@@ -54,7 +52,7 @@ export default function PaymentForm({ total, commandeData, onPaymentSuccess }) {
         await createCommande(updatedCommande);
         clearBasket();
         toast.success("Commande créer avec succès !");
-        navigate("/");
+        navigate("/mes-commandes");
       }
     } catch (error) {
       toast.error("Une erreur est survenue : " + error.message);

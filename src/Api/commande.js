@@ -3,6 +3,26 @@ import axiosInstance from "./axiosConfig";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:3001";
 
+export async function getAllCommandes() {
+  try {
+    const response = await axiosInstance.get(`${API_URL}commandes/listes`);
+
+    console.log("response : ", response);
+
+    return response.data.commandes;
+  } catch (error) {
+    console.log("error.message : ", error.message);
+    toast.error("Erreur lors de la création de la commande", {
+      position: "top-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    return [];
+  }
+}
 export async function calculBasket(data) {
   try {
     const response = await axiosInstance.post(

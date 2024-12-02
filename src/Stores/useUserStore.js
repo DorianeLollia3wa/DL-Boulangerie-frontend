@@ -5,12 +5,14 @@ import { create } from "zustand";
 import { toast } from "react-toastify";
 import { getAllAdresses } from "../Api/adresse";
 import { authTokenUser } from "../Api/auth";
+import { getAllCommandes } from "../Api/commande";
 
 const useUserStore = create((set) => ({
   userData: null,
   isAuthenticated: false,
 
   allAdresse: [],
+  allCommande: [],
 
   setUserData: (user) => set({ userData: user }),
 
@@ -54,6 +56,15 @@ const useUserStore = create((set) => ({
       set({ allAdresse: adresses });
     } catch (error) {
       console.error("Erreur lors de la récupération des adresses :", error);
+    }
+  },
+
+  fetchAllCommandes: async () => {
+    try {
+      const commande = await getAllCommandes();
+      set({ allCommande: commande });
+    } catch (error) {
+      console.error("Erreur lors de la récupération des commande :", error);
     }
   },
 }));
