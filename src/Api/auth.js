@@ -20,23 +20,10 @@ export const authTokenUser = async (navigate) => {
 
     const user = response.data;
 
-    const setUserData = useUserStore.getState().setUserData;
-
-    setUserData(user);
-
     return user;
   } catch (error) {
     const logout = useUserStore.getState().logout;
     logout();
-
-    // toast.error("Atuh Erreur lors de la récupération des données utilisateur", {
-    //   position: "top-left",
-    //   autoClose: 3000,
-    //   hideProgressBar: false,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    // });
 
     navigate("/");
   }

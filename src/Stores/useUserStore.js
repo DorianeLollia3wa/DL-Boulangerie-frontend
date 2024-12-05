@@ -33,8 +33,9 @@ const useUserStore = create((set) => ({
         const userId = decodedToken.id;
 
         const user = await authTokenUser(userId);
+
         set({ isAuthenticated: true });
-        set({ userData: user });
+        set({ userData: user.utilisateur });
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des données utilisateur",
@@ -62,7 +63,6 @@ const useUserStore = create((set) => ({
   fetchAllCommandes: async () => {
     try {
       const commande = await getAllCommandes();
-      console.log("commande : ", commande);
       set({ allCommande: commande.reverse() });
     } catch (error) {
       console.error("Erreur lors de la récupération des commande :", error);

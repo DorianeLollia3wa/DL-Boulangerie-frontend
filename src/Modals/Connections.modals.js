@@ -71,10 +71,12 @@ function Login({ setSeeLogin }) {
 
       {message !== "" && <p className="error">{message}</p>}
 
-      <button type="submit">Se connecter</button>
-
+      <button className="centerbutton" type="submit">
+        Se connecter
+      </button>
+      <br />
       <button
-        className="changeForm"
+        className="centerbutton changeForm"
         type="button"
         onClick={() => setSeeLogin(false)}
       >
@@ -94,6 +96,7 @@ function Register({ setSeeLogin }) {
   const [message, setMessage] = useState("");
 
   async function onSubmit(data) {
+    console.log("data : ");
     try {
       if (data.confirmer_mot_de_passe !== data.mot_de_passe) {
         setMessage("Les mots de passe ne sont pas identique");
@@ -116,7 +119,7 @@ function Register({ setSeeLogin }) {
           id="nom"
           {...register("nom", { required: "Nom est requis" })}
         />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.nom && <p>{errors.nom.message}</p>}
       </div>
 
       <div className="BoxInput">
@@ -142,7 +145,7 @@ function Register({ setSeeLogin }) {
           id="telephone"
           {...register("telephone", { required: "Téléphone est requis" })}
         />
-        {errors.phone && <p>{errors.phone.message}</p>}
+        {errors.telephone && <p>{errors.telephone.message}</p>}
       </div>
 
       <div className="BoxInput">
@@ -163,7 +166,7 @@ function Register({ setSeeLogin }) {
             },
           })}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.mot_de_passe && <p>{errors.mot_de_passe.message}</p>}
       </div>
 
       <div className="BoxInput">
@@ -175,15 +178,19 @@ function Register({ setSeeLogin }) {
             required: "Mot de passe est requis",
           })}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.confirmer_mot_de_passe && (
+          <p>{errors.confirmer_mot_de_passe.message}</p>
+        )}
       </div>
 
       {message !== "" && <p className="error">{message}</p>}
 
-      <button type="submit">Créer</button>
-
+      <button className="centerbutton" type="submit">
+        Créer le compte
+      </button>
+      <br />
       <button
-        className="changeForm"
+        className="centerbutton changeForm"
         type="button"
         onClick={() => setSeeLogin(true)}
       >

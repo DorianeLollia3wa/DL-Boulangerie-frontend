@@ -11,9 +11,12 @@ import "../../Styles/Contents/Header.scss";
 export default function Header() {
   let navigate = useNavigate();
   const { userData, isAuthenticated, logout } = useUserStore();
+
   const setOpenConnections = useModalStore((s) => s.setOpenConnections);
 
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const roles = ["Administrateur", "Livreur", "Préparateur"];
   return (
     <header className="Header">
       <ImgBox
@@ -35,7 +38,7 @@ export default function Header() {
             <>
               <li onClick={() => navigate("/mon-panier")}>Mon panier</li>
               <li onClick={() => navigate("/mes-commandes")}>Mes Commandes</li>
-              {userData.utilisateur.role.nom_role === "Administrateur" && (
+              {roles.includes(userData?.role?.nom_role) && (
                 <li onClick={() => navigate("/gestion")}>Gestion</li>
               )}
               <FontAwesomeIcon
