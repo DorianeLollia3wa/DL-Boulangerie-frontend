@@ -1,5 +1,6 @@
 import { faBloggerB } from "@fortawesome/free-brands-svg-icons";
 import {
+  faArrowLeft,
   faArrowRightFromBracket,
   faBars,
   faCartShopping,
@@ -12,6 +13,7 @@ export const FontAwesomeIcons = {
   faBloggerB,
   faCartShopping,
   faTrashCan,
+  faArrowLeft,
   faRightToBracket,
   faArrowRightFromBracket,
 };

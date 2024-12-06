@@ -49,7 +49,7 @@ export default function Commande() {
             })
           ) : (
             <tr>
-              <td colSpan="5">Vous n'avez pas passer de commande.</td>
+              <td colSpan="6">Vous n'avez pas passer de commande.</td>
             </tr>
           )}
         </tbody>

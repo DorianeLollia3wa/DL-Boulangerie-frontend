@@ -22,6 +22,7 @@ import Produits from "./Pages/Produits";
 // Icon fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import Commande from "./Pages/Commande";
+import Gestion from "./Pages/Gestion";
 library.add(FontAwesomeIcons);
 
 function PrivateRoute({ children }) {
@@ -64,7 +65,7 @@ export default function Pages() {
           path="/gestion"
           element={
             <PrivateRoute>
-              <Commande />
+              <Gestion />
             </PrivateRoute>
           }
         />

@@ -1,5 +1,19 @@
 46 rue René Clair 75018 PARIS
 
+##
+
+Compte test
+
+Aazerty123
+
+admin@gmail.com
+livreur@gmail.com
+preparateur@gmail.com
+client@gmail.com
+client1@gmail.com
+client2@gmail.com
+client3@gmail.com
+
 ## Supprimer la base de donné
 
 DROP TABLE IF EXISTS

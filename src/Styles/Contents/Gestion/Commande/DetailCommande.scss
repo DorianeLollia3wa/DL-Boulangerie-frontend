@@ -1,0 +1,103 @@
+@import "../../../variables";
+
+.DetailCommande {
+  padding-bottom: 50px;
+  .BoxDetail {
+    article {
+      display: flex;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      .checkboxWrapper {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+
+        input[type="checkbox"] {
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+          cursor: pointer;
+          accent-color: $clearBrown1;
+        }
+
+        label {
+          font-size: 1rem;
+          color: #333;
+        }
+      }
+
+      .boxTexts {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-left: 15px;
+
+        p {
+          color: $darkBrown2;
+        }
+
+        i {
+          padding-top: 20px;
+          color: $darkBrown1;
+        }
+      }
+
+      .imgBox {
+        width: 150px;
+        height: 100px;
+
+        img {
+          border-radius: 8px;
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .statusButtons {
+    padding-top: 20px;
+    h6 {
+      padding-bottom: 20px;
+    }
+    .boxStatus {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 10px;
+      margin: 0 10px;
+      background-color: $clearBrown1;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      &:hover {
+        background-color: $clearBrown2;
+      }
+    }
+  }
+  .btnSubmit {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: $clearBrown1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:hover {
+      background-color: $clearBrown2;
+    }
+  }
+}

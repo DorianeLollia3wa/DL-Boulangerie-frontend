@@ -3,19 +3,39 @@ import { create } from "zustand";
 
 import { listeStatutCommandes } from "../Api/commande";
 
-const useGestionStore = create((set) => ({
-  allCommandeGestion: [],
+// Génère un setter généralisé pour mettre à jour les états
+const createSetter = (set) => (key) => (value) =>
+  set((state) => ({ ...state, [key]: value }));
 
-  fetchAllCommandesGestion: async (data) => {
-    try {
-      const commande = await listeStatutCommandes(data);
-      set({
-        allCommandeGestion: commande,
-      });
-    } catch (error) {
-      console.error("Erreur lors de la récupération des commande :", error);
-    }
-  },
-}));
+const useGestionStore = create((set) => {
+  const setter = createSetter(set);
+
+  return {
+    allCommandeGestion: [],
+    nameSee: "Commande",
+    idCommande: null,
+    typeLiv: null,
+    statuCommmande: null,
+
+    // Setter généralisé pour `nameSee`
+    setNameSee: setter("nameSee"),
+    setIdCommande: setter("idCommande"),
+    setTypeLiv: setter("typeLiv"),
+    setStatuCommmande: setter("statuCommmande"),
+
+    // Fonction pour récupérer les commandes
+    fetchAllCommandesGestion: async (data) => {
+      try {
+        const commande = await listeStatutCommandes(data);
+        set({
+          allCommandeGestion: Array.isArray(commande) ? commande : [],
+        });
+      } catch (error) {
+        console.error("Erreur lors de la récupération des commande :", error);
+        set({ allCommandeGestion: [] }); // En cas d'erreur, définir une valeur par défaut
+      }
+    },
+  };
+});
 
 export default useGestionStore;

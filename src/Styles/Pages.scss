@@ -36,6 +36,15 @@ button {
   border: 1px solid gainsboro;
   transform: all 0.3s ease-in-out;
 }
+.centerbutton {
+  margin-top: 20px;
+
+  margin-top: 20px;
+  text-align: center;
+  position: relative;
+  left: 50%; /* Positionne le bouton à 50% de la largeur */
+  transform: translateX(-50%);
+}
 
 .Modals {
   position: fixed;
@@ -49,7 +58,8 @@ button {
   background-color: $clearPink1;
   justify-content: space-around;
   box-shadow: 0px 2px 15px $darkGray2;
-  top: 30%;
+  // top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   h1 {
