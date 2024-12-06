@@ -13,8 +13,14 @@ import "../../../Styles/Contents/Gestion/Commande/DetailCommande.scss";
 
 export default function DetailCommande() {
   const { userData } = useUserStore();
-  const { idCommande, setNameSee, typeLiv, statuCommmande, statuAppCommande } =
-    useGestionStore();
+  const {
+    idCommande,
+    setNameSee,
+    typeLiv,
+    statuCommmande,
+    statuAppCommande,
+    dataCommande,
+  } = useGestionStore();
   const { control, setValue } = useForm();
   const [detailCommande, setDetailCommande] = useState([]);
   const [statut, setStatut] = useState([]);
@@ -110,45 +116,86 @@ export default function DetailCommande() {
         />
         Récapitulatif de la commande
       </h3>
-      <h6>Numéro de Commande : {idCommande}</h6>
+      <h6>
+        Numéro de Commande : {idCommande} <br />
+      </h6>
       <br />
-
-      <div className="BoxDetail">
-        {detailCommande.length > 0 &&
-          detailCommande.map((detail) => (
-            <article key={detail.id_Ligne_panier} className="articleDetail">
-              <ImgBox nameBox="imgBox" urlSrc={detail.produit.image_product} />
-              <div className="boxTexts">
-                <p>
-                  <strong>Réf :</strong> {detail.id_Produits}
-                </p>
-                <p>
-                  <strong>Nom :</strong> {detail.produit.nom}
-                </p>
-                <p>
-                  <strong>Quantité :</strong> {detail.quantite}
-                </p>
-                <i>{detail.produit.description}</i>
-              </div>
-              <div className="checkboxWrapper">
-                <Controller
-                  name={`prepared_${detail.id_Ligne_panier}`}
-                  control={control}
-                  render={({ field }) => (
-                    <input
-                      type="checkbox"
-                      id={`checkbox-${detail.id_Ligne_panier}`}
-                      {...field}
-                    />
-                  )}
+      <p>
+        <strong>Type de livraison :</strong>
+        {dataCommande.typeLivraison.type_livraison}
+      </p>
+      <br />
+      {userData?.role?.nom_role === "Livreur" && (
+        <section className="BoxInfoClient">
+          <p>
+            <strong>Client :</strong> {dataCommande.utilisateur.nom}
+          </p>
+          <p>
+            <strong>Téléphone :</strong> {dataCommande.utilisateur.telephone}
+          </p>
+          <p>
+            <strong>Adresse :</strong> {dataCommande.adresseCommande}
+          </p>
+          <p>
+            <strong>Total :</strong> {dataCommande.total}
+          </p>
+          <div className="InfoCom">
+            {detailCommande.length > 0 &&
+              detailCommande.map((detail) => (
+                <div className="boxTexts" key={detail.id_Ligne_panier}>
+                  <p>
+                    <strong>Nom :</strong> {detail.produit.nom}
+                  </p>
+                  <p>
+                    <strong>Quantité :</strong> {detail.quantite}
+                  </p>
+                  <i>{detail.produit.description}</i>
+                </div>
+              ))}
+          </div>
+        </section>
+      )}
+      {userData?.role?.nom_role !== "Livreur" && (
+        <div className="BoxDetail">
+          {detailCommande.length > 0 &&
+            detailCommande.map((detail) => (
+              <article key={detail.id_Ligne_panier} className="articleDetail">
+                <ImgBox
+                  nameBox="imgBox"
+                  urlSrc={detail.produit.image_product}
                 />
-                <label htmlFor={`checkbox-${detail.id_Ligne_panier}`}>
-                  Article préparé
-                </label>
-              </div>
-            </article>
-          ))}
-      </div>
+                <div className="boxTexts">
+                  <p>
+                    <strong>Réf :</strong> {detail.id_Produits}
+                  </p>
+                  <p>
+                    <strong>Nom :</strong> {detail.produit.nom}
+                  </p>
+                  <p>
+                    <strong>Quantité :</strong> {detail.quantite}
+                  </p>
+                  <i>{detail.produit.description}</i>
+                </div>
+                <div className="checkboxWrapper">
+                  <Controller
+                    name={`prepared_${detail.id_Ligne_panier}`}
+                    control={control}
+                    render={({ field }) => (
+                      <input
+                        type="checkbox"
+                        id={`checkbox-${detail.id_Ligne_panier}`}
+                        {...field}
+                      />
+                    )}
+                  />
+                  <label htmlFor={`checkbox-${detail.id_Ligne_panier}`}>
+                    Article préparé
+                  </label>
+                </div>
+              </article>
+            ))}
+        </div>
+      )}
       <div className="statusButtons">
         <h6>Statuts disponibles :</h6>
         <div className="boxStatus">

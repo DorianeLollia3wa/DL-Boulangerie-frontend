@@ -8,6 +8,7 @@ import useUserStore from "../../../Stores/useUserStore";
 export default function Commande() {
   const { userData } = useUserStore();
   const {
+    setDataCommande,
     filterCommande,
     setFilterCommande,
     allCommandeGestion,
@@ -81,7 +82,7 @@ export default function Commande() {
       "Préparation (Terminer)",
     ];
     let livreurStatus = ["Livraison (En cours)", "Livrer"];
-
+    setDataCommande(commande);
     {
       try {
         if (
@@ -139,13 +140,7 @@ export default function Commande() {
     setIdCommande(commande.id_Commandes);
     setTypeLiv(commande.typeLivraison.type_livraison);
 
-    if (userData?.role?.nom_role === "Préparateur") {
-      setNameSee("DetailCommande");
-    } else if (userData?.role?.nom_role === "Livreur") {
-      setNameSee("DetailLivraison");
-    } else if (userData?.role?.nom_role === "Administrateur") {
-      setNameSee("DetailCommande");
-    }
+    setNameSee("DetailCommande");
   };
 
   return (

@@ -11,6 +11,8 @@ const useGestionStore = create((set) => {
   const setter = createSetter(set);
 
   return {
+    dataCommande: [],
+
     filterCommande: "",
 
     allCommandeGestion: [],
@@ -21,6 +23,7 @@ const useGestionStore = create((set) => {
     statuAppCommande: null,
 
     // Setter généralisé pour `nameSee`
+    setDataCommande: setter("dataCommande"),
     setNameSee: setter("nameSee"),
     setIdCommande: setter("idCommande"),
     setTypeLiv: setter("typeLiv"),

@@ -2,6 +2,19 @@
 
 .DetailCommande {
   padding-bottom: 50px;
+
+  .BoxInfoClient {
+    padding-left: 20px;
+    padding: 10px;
+    padding-bottom: 20px;
+    color: $darkBrown1;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    .boxTexts {
+      padding-top: 20px;
+    }
+  }
   .BoxDetail {
     article {
       display: flex;
