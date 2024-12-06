@@ -1,6 +1,7 @@
 import React from "react";
 import Commande from "../Contents/Gestion/Commande/Commande";
 import DetailCommande from "../Contents/Gestion/Commande/DetailCommande";
+import DetailLivraison from "../Contents/Gestion/Commande/DetailLivraison";
 import useGestionStore from "../Stores/useGestionStore";
 import useUserStore from "../Stores/useUserStore";
 import "../Styles/Pages/Gestion.scss";
@@ -29,6 +30,7 @@ export default function Gestion() {
         <div className="main-content">
           {nameSee === "Commande" && <Commande />}
           {nameSee === "DetailCommande" && <DetailCommande />}
+          {nameSee === "DetailLivraison" && <DetailLivraison />}
 
           {/* Ici, vous pouvez afficher les détails des commandes */}
         </div>

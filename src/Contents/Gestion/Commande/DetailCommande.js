@@ -13,7 +13,8 @@ import "../../../Styles/Contents/Gestion/Commande/DetailCommande.scss";
 
 export default function DetailCommande() {
   const { userData } = useUserStore();
-  const { idCommande, setNameSee, typeLiv, statuCommmande } = useGestionStore();
+  const { idCommande, setNameSee, typeLiv, statuCommmande, statuAppCommande } =
+    useGestionStore();
   const { control, setValue } = useForm();
   const [detailCommande, setDetailCommande] = useState([]);
   const [statut, setStatut] = useState([]);
@@ -41,7 +42,7 @@ export default function DetailCommande() {
           "Préparation (Terminer)",
           "En attente de récupération du client",
           "Livraison (En cours)",
-          "Livré",
+          "Livrer",
           "Récupéré",
           "Annulé",
         ];
@@ -59,9 +60,12 @@ export default function DetailCommande() {
             "En liste d'attente",
           ];
         }
+      } else if (userData?.role?.nom_role === "Livreur") {
+        statuses = ["Préparation (Terminer)", "Livraison (En cours)", "Livrer"];
       }
+      let actualStatu = statuAppCommande ? statuAppCommande : statuCommmande;
       const filteredStatuses = statuses.filter(
-        (status) => status !== statuCommmande
+        (status) => status !== actualStatu
       );
 
       setStatut(filteredStatuses);

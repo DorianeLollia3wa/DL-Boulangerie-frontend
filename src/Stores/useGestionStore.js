@@ -11,17 +11,22 @@ const useGestionStore = create((set) => {
   const setter = createSetter(set);
 
   return {
+    filterCommande: "",
+
     allCommandeGestion: [],
     nameSee: "Commande",
     idCommande: null,
     typeLiv: null,
     statuCommmande: null,
+    statuAppCommande: null,
 
     // Setter généralisé pour `nameSee`
     setNameSee: setter("nameSee"),
     setIdCommande: setter("idCommande"),
     setTypeLiv: setter("typeLiv"),
     setStatuCommmande: setter("statuCommmande"),
+    setStatuAppCommande: setter("statuAppCommande"),
+    setFilterCommande: setter("filterCommande"),
 
     // Fonction pour récupérer les commandes
     fetchAllCommandesGestion: async (data) => {
