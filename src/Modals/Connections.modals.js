@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { userLogin, userRegister } from "../Api/user";
@@ -31,7 +32,13 @@ function Login({ setSeeLogin }) {
 
   async function onSubmit(data) {
     try {
-      await userLogin(data);
+      // Nettoyer les données du formulaire avec DOMPurify
+      const sanitizedData = {
+        email: DOMPurify.sanitize(data.email),
+        mot_de_passe: DOMPurify.sanitize(data.mot_de_passe),
+      };
+      // Envoyer les données nettoyées au backend
+      await userLogin(sanitizedData);
     } catch (error) {
       console.log("error : ", error);
       setMessage(error.message);
@@ -98,10 +105,17 @@ function Register({ setSeeLogin }) {
   async function onSubmit(data) {
     console.log("data : ");
     try {
-      if (data.confirmer_mot_de_passe !== data.mot_de_passe) {
+      const sanitizedData = {
+        nom: DOMPurify.sanitize(data.nom),
+        email: DOMPurify.sanitize(data.email),
+        telephone: DOMPurify.sanitize(data.telephone),
+        mot_de_passe: DOMPurify.sanitize(data.mot_de_passe),
+        confirmer_mot_de_passe: DOMPurify.sanitize(data.confirmer_mot_de_passe),
+      };
+      if (sanitizedData.confirmer_mot_de_passe !== sanitizedData.mot_de_passe) {
         setMessage("Les mots de passe ne sont pas identique");
       } else {
-        await userRegister(data);
+        await userRegister(sanitizedData);
       }
     } catch (error) {
       setMessage(error.message);
