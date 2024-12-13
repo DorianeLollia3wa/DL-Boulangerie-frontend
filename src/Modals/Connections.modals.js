@@ -103,7 +103,6 @@ function Register({ setSeeLogin }) {
   const [message, setMessage] = useState("");
 
   async function onSubmit(data) {
-    console.log("data : ");
     try {
       const sanitizedData = {
         nom: DOMPurify.sanitize(data.nom),
