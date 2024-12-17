@@ -55,8 +55,8 @@ export default function Commande() {
 
         { value: "Livraison (En cours)", label: "Livraison (En cours)" },
         { value: "Livrer", label: "Livrer" },
-        { value: "Récupéré", label: "Récupéré" },
-        { value: "Annulé", label: "Annulé" },
+        { value: "Récupérer", label: "Récupérer" },
+        { value: "Annuler", label: "Annuler" },
       ];
       setFilters(options);
       setFilterCommande(options[0].value); // Par défaut :  "En attente de récupération du client"

@@ -21,8 +21,8 @@ export default function Gestion() {
         {/* Menu de navigation */}
         <nav className="menu-nav">
           <button>Commandes</button>
-          <button>Utilisateurs</button>
-          <button>Produits</button>
+          {/* <button>Utilisateurs</button>
+          <button>Produits</button> */}
         </nav>
 
         {/* Section principale */}
